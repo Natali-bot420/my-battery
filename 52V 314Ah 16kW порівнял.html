@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVolt для Бізнесу: Енергонезалежність</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- 
+        Palette Selection: "Energetic & Professional"
+        Primary Blue: #2563EB (Trust, Technology)
+        Growth Green: #059669 (Profit, Efficiency)
+        Alert Red: #DC2626 (Risk, Generator Costs)
+        Warning Amber: #D97706 (Energy, Attention)
+        Background: #F8FAFC (Clean Slate)
+    -->
+
+    <style>
+        body { font-family: 'Open Sans', sans-serif; background-color: #F8FAFC; color: #1E293B; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
+        
+        /* Chart Container Strict Rules */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; 
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container { height: 300px; }
+        }
+
+        /* Custom Card Styling */
+        .biz-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            border-top: 4px solid transparent;
+        }
+        .biz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .border-blue { border-top-color: #2563EB; }
+        .border-green { border-top-color: #059669; }
+        .border-red { border-top-color: #DC2626; }
+
+        /* Typography Highlights */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #2563EB, #059669);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- HERO SECTION -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">⚡</span>
+                <span class="font-extrabold text-xl tracking-tight text-slate-900">EcoVolt<span class="text-blue-600">Business</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-500">
+                <a href="#problem" class="hover:text-blue-600 transition">Проблема</a>
+                <a href="#solution" class="hover:text-blue-600 transition">Рішення</a>
+                <a href="#finance" class="hover:text-blue-600 transition">Економіка</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="bg-slate-900 text-white pt-16 pb-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-block bg-blue-600 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wider">
+                    Для Магазинів, МАФів та Кав'ярень
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                    Енергія, що <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Працює на Прибуток</span>
+                </h1>
+                <p class="text-lg text-slate-300 mb-8 max-w-xl">
+                    Забудьте про шум генераторів, каністри з паливом та простої. EcoVolt LiFePO4 — це безперервність бізнес-процесів та спокій вашого персоналу.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg border border-white/20">
+                        <div class="text-2xl font-bold text-emerald-400">11 000+</div>
+                        <div class="text-xs text-slate-400">Циклів (30 років)</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg border border-white/20">
+                        <div class="text-2xl font-bold text-emerald-400">16 кВт·г</div>
+                        <div class="text-xs text-slate-400">Потужний запас</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg border border-white/20">
+                        <div class="text-2xl font-bold text-emerald-400">87 000 ₴</div>
+                        <div class="text-xs text-slate-400">Інвестиція</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Battery Image Container -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
+                <img src="d:/Фото для сайта/Аккумуляторы/на 52V/кейс в комнате.jpg" alt="EcoVolt Battery" 
+     class="relative rounded-xl shadow-2xl border-4 border-slate-800 
+            transform transition duration-500 
+            rotate-1 hover:rotate-0 
+            hover:scale-[1.07] cursor-pointer mx-auto max-w-md w-full">
+                <div class="absolute -bottom-6 -right-6 bg-white text-slate-900 p-4 rounded-lg shadow-xl hidden md:block">
+                    <div class="text-sm font-bold">51.2V 314Ah</div>
+                    <div class="text-xs text-slate-500">Professional Series</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-20 space-y-16 pb-20">
+
+        <!-- SECTION 1: BUSINESS IMPACT (RADAR) -->
+        <section id="problem">
+            <div class="biz-card border-red p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-5">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">💥 Генератор — це ризик для бізнесу</h2>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            У бізнес-середовищі (магазин, офіс, кав'ярня) критерії оцінки енергії зміщуються. Комфорт важливий, але **надійність та простота** — критичні. Генератор вимагає постійної уваги персоналу, створює шум (втрата клієнтів) та небезпеку.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-sm text-slate-700">
+                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mr-3 text-xs">❌</span>
+                                Складність запуску для персоналу (жінки/продавці)
+                            </li>
+                            <li class="flex items-center text-sm text-slate-700">
+                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mr-3 text-xs">❌</span>
+                                Ризик пожежі та штрафи від ДСНС
+                            </li>
+                            <li class="flex items-center text-sm text-slate-700">
+                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center mr-3 text-xs">❌</span>
+                                Перерва у бізнес-процесах (каса вимикається)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-7 flex flex-col justify-center">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wide text-center mb-4">Операційне тертя (Менше = Краще)</h3>
+                        <div class="chart-container">
+                            <canvas id="frictionRadar"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: RELIABILITY & UPTIME (BAR) -->
+        <section id="solution">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-extrabold text-slate-900">Еволюція Надійності</h2>
+                <p class="text-slate-500 mt-2 max-w-2xl mx-auto">Чому LiFePO4 — це стандарт для сучасної комерції.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Stat Card 1 -->
+                <div class="biz-card border-blue p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Ресурс Активу</h3>
+                            <p class="text-xs text-slate-500">Кількість циклів до списання</p>
+                        </div>
+                        <div class="p-2 bg-blue-50 rounded-lg text-blue-600 text-2xl">⏳</div>
+                    </div>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="lifespanChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded">EcoVolt: 30 років</span>
+                        <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded ml-2">Генератор: 2 роки</span>
+                    </div>
+                </div>
+
+                <!-- Stat Card 2: Features -->
+                <div class="biz-card border-green p-6 flex flex-col justify-center">
+                    <h3 class="text-lg font-bold text-slate-800 mb-6">Переваги для Персоналу</h3>
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-600 text-white font-bold">01</div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-slate-900">Автоматизація (UPS)</h4>
+                                <p class="text-sm text-slate-500">Світло не зникає ні на секунду. Кавомашина не перезавантажується, клієнт не помічає відключення.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-600 text-white font-bold">02</div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-slate-900">Безпека та Тиша</h4>
+                                <p class="text-sm text-slate-500">Жодних вихлопних газів. Можна встановлювати всередині приміщення. Ідеально для житлових будинків.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-600 text-white font-bold">03</div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-slate-900">Нульове Обслуговування</h4>
+                                <p class="text-sm text-slate-500">Не треба міняти мастило, свічки чи фільтри. Персонал займається продажами, а не механікою.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: FINANCIAL PROJECTION (PLOTLY) -->
+        <section id="finance" class="biz-card p-8 border-green">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-6 border-b border-slate-100 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">💰 Фінансова Проекція (10 Років)</h2>
+                    <p class="text-slate-600 text-sm mt-1">Порівняння сукупної вартості володіння (TCO)</p>
+                </div>
+                <div class="text-right mt-4 md:mt-0">
+                    <div class="text-3xl font-extrabold text-emerald-600">5.2 грн</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-wide">Вартість 1 кВт·г (EcoVolt)</div>
+                </div>
+            </div>
+            
+            <p class="text-slate-600 mb-6 text-sm">
+                Хоча стартова інвестиція в LiFePO4 вища , генератор "з'їдає" бюджет через пальне та постійні ремонти. Графік показує точку беззбитковості та колосальну різницю через 10 років.
+            </p>
+
+            <div id="financialChart" style="width:100%; height:450px;"></div>
+            
+            <div class="grid grid-cols-2 gap-4 mt-6 text-center">
+                <div class="bg-red-50 p-3 rounded text-sm text-red-700 font-semibold">
+                    Витрати на Генератор (10 років)
+                </div>
+                <div class="bg-emerald-50 p-3 rounded text-sm text-emerald-700 font-semibold">
+                    Витрати на EcoVolt (10 років)
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER / SPECS -->
+        <footer class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-slate-900 px-8 py-10 md:flex md:justify-between md:items-center">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold text-white mb-2">Технічні Характеристики</h3>
+                    <p class="text-slate-400 text-sm">Модель: 51.2V 314Ah (16kWh)</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 text-white">
+                    <div>
+                        <div class="text-xs text-slate-500 uppercase">Номінальна Ємність</div>
+                        <div class="font-mono text-lg text-emerald-400">314 Ah</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 uppercase">Запас Енергії</div>
+                        <div class="font-mono text-lg text-emerald-400">16 076 Wh</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 uppercase">Ресурс</div>
+                        <div class="font-mono text-lg text-emerald-400">11 000+ Циклів</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 uppercase">SOH (Health)</div>
+                        <div class="font-mono text-lg text-emerald-400">>70% @ 30 років</div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-8 text-center bg-slate-50">
+                <p class="text-slate-600 mb-4 font-medium">Готові модернізувати свій бізнес?</p>
+                <!-- Активна кнопка виклику -->
+                <a href="tel:+380674400425" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full shadow-lg transition transform hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    <span class="flex items-center justify-center space-x-2">
+                        <span>📞</span>
+                        <span>Отримати Комерційну Пропозицію</span>
+                    </span>
+                </a>
+                <p class="text-xs text-slate-400 mt-4">Натисніть для дзвінка: +380674400425</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. Label Processing (16 char limit) ---
+        function processLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            let lines = [], currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length < 16) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Common Chart Defaults
+        Chart.defaults.font.family = "'Open Sans', sans-serif";
+        Chart.defaults.color = '#64748B';
+
+        const tooltipConfig = {
+            backgroundColor: 'rgba(30, 41, 59, 0.95)',
+            padding: 12,
+            titleFont: { family: 'Montserrat', size: 13 },
+            bodyFont: { family: 'Open Sans', size: 12 },
+            callbacks: {
+                title: function(items) {
+                    let label = items[0].chart.data.labels[items[0].dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            }
+        };
+
+        // --- 2. RADAR CHART: Operational Friction ---
+        const ctxRadar = document.getElementById('frictionRadar').getContext('2d');
+        const radarLabels = [
+            "Ризик Пожежі", 
+            "Шум (dB)", 
+            "Витрати Палива", 
+            "Складність для Персоналу", 
+            "Потреба в ТО"
+        ].map(processLabel);
+
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: radarLabels,
+                datasets: [{
+                    label: 'EcoVolt LiFePO4',
+                    data: [5, 0, 5, 10, 5], 
+                    backgroundColor: 'rgba(5, 150, 105, 0.2)', // Green
+                    borderColor: '#059669',
+                    pointBackgroundColor: '#059669',
+                    borderWidth: 2
+                }, {
+                    label: 'Генератор (Дизель/Бензин)',
+                    data: [80, 95, 100, 90, 85], 
+                    backgroundColor: 'rgba(220, 38, 38, 0.2)', // Red
+                    borderColor: '#DC2626',
+                    pointBackgroundColor: '#DC2626',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { display: false },
+                        pointLabels: { font: { size: 11 } },
+                        grid: { color: '#E2E8F0' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // --- 3. BAR CHART: Lifespan Comparison ---
+        const ctxBar = document.getElementById('lifespanChart').getContext('2d');
+        const barLabels = ["Генератор (Ресурс)", "EcoVolt (Ресурс)"].map(processLabel);
+
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: barLabels,
+                datasets: [{
+                    label: 'Кількість Циклів / Мотогодин (нормалізовано)',
+                    data: [2500, 11000], 
+                    backgroundColor: ['#DC2626', '#059669'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { display: false }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // --- 4. PLOTLY CHART: 10-Year Financial Projection ---
+        const years = Array.from({length: 11}, (_, i) => i); 
+        
+        const ecoVoltData = years.map(y => {
+            const initial = 87000;
+            const electricity = y * 5000; 
+            return initial + electricity;
+        });
+
+        const genData = years.map(y => {
+            const initial = 35000;
+            const fuelAndMaint = y * 150000; 
+            const replacements = Math.floor(y / 2.5) * 35000; 
+            return initial + fuelAndMaint + replacements;
+        });
+
+        const trace1 = {
+            x: years,
+            y: ecoVoltData,
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'EcoVolt (Інвестиція)',
+            line: { color: '#059669', width: 4 },
+            marker: { size: 8 }
+        };
+
+        const trace2 = {
+            x: years,
+            y: genData,
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'Генератор (Витрати)',
+            line: { color: '#DC2626', width: 3, dash: 'dot' },
+            marker: { size: 6 }
+        };
+
+        const layout = {
+            title: {
+                text: 'Наростаючі витрати (10 Років)',
+                font: { family: 'Montserrat', size: 18, color: '#1E293B' }
+            },
+            xaxis: { 
+                title: 'Роки Експлуатації', 
+                showgrid: false,
+                dtick: 1
+            },
+            yaxis: { 
+                title: 'Витрати (ГРН)', 
+                gridcolor: '#E2E8F0',
+            },
+            showlegend: true,
+            legend: { x: 0, y: 1 },
+            margin: { l: 60, r: 30, t: 50, b: 50 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { family: 'Open Sans' }
+        };
+
+        const config = { responsive: true, displayModeBar: false };
+
+        Plotly.newPlot('financialChart', [trace1, trace2], layout, config);
+
+    </script>
+</body>
+</html>
